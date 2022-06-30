@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block 'title' %}Contact{% endblock 'title' %}
+
+{% block 'body' %}
+{% if status_code == 200 %}
+<div class="alert alert-success" role="alert">
+    <strong>Successfully Sent!</strong>
+</div>
+{% endif %}
+
+<div class="container my-5">
+    <form method="post" action="/contact/">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Name</span>
+            <input name="name" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+            <input name="email"type="email" class="form-control" placeholder="User Email Address" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <span class="input-group-text" id="basic-addon2">@example.com</span>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Phone Number</span>
+            <input name="number" type="text" class="form-control" placeholder="Phone Number" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">Comment</span>
+            <textarea name="data" class="form-control" aria-label="With textarea"></textarea>
+        </div>
+        <button type="submit" class="btn btn-outline-primary my-3 p-3">Submit</button>
+    </form>
+</div>
+{% endblock 'body' %}
