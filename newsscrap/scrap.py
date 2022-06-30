@@ -7,9 +7,9 @@ import json
 
 class scrap:
     def __init__(self, apikey):
-        # api = NewsDataApiClient(apikey=apikey)
-        # response = api.news_api(q = "trending" , country = "in", language="en")
-        response = json.load(open("newsscrap/test.json"))
+        api = NewsDataApiClient(apikey=apikey)
+        response = api.news_api(q = "trending" , country = "in", language="en")
+        # response = json.load(open("newsscrap/test.json"))
         self.data = response['results'] if response['status'] == 'success' else None
 
     def get_data(self):
@@ -35,5 +35,4 @@ class scrap:
 
 
 if __name__ == "__main__":
-    # http://news.google.com/news?q=apple&output=rss Google RSS feed
     scrap("pub_86308d85a19dd4b6ec10c5f34bcdd4fa9704").get_data()
