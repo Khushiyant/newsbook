@@ -33,11 +33,14 @@ def signupUser(request):
         confirm_password = request.POST.get('confirm_password')
 
         if password == confirm_password:
-            user = User.objects.create_user(username, email, password)
-            user.save()
-            return redirect('/login/')
+            try:
+                user = User.objects.create_user(username, email, password)
+                user.save()
+                return redirect('/login/')
+            except Exception as e:
+                return render(request, 'signup.html', {'status_code': 409})
         else:
-            return redirect('/signup/')
+            return render(request, 'signup.html', {'status_code': 401})
             
     return render(request, 'signup.html')
     
