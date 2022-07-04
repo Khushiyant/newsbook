@@ -31,19 +31,19 @@ def index(request):
 
     # }
     context = scrap("pub_86308d85a19dd4b6ec10c5f34bcdd4fa9704").get_data()
-    return render(request, 'index.html', context)
+    return render(request, 'main/index.html', context)
 
 
 def profile(request):
     if request.user.is_anonymous:
         return redirect('/login')
-    return render(request, 'profile.html')
+    return render(request, 'main/profile.html')
 
 
 def about(request):
     if request.user.is_anonymous:
         return redirect('/login')
-    return render(request, 'about.html')
+    return render(request, 'main/about.html')
 
 
 def contact(request):
@@ -62,10 +62,14 @@ def contact(request):
                           data=data, date=datetime.today())
         contact.save()
         context['status'] = 200
-    return render(request, 'contact.html', context)
+    return render(request, 'main/contact.html', context)
 
 
 def services(request):
     if request.user.is_anonymous:
         return redirect('/login')
-    return render(request, 'services.html')
+    return render(request, 'main/services.html')
+
+def error_404_view(request, exception):
+   
+    return render(request, '404.html')

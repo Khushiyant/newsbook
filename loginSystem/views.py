@@ -18,8 +18,8 @@ def loginUser(request):
             return redirect('/home/')
         else:
             context['status_code'] = 404
-            return render(request, 'login.html', context)
-    return render(request, 'login.html')
+            return render(request, 'login/login.html', context)
+    return render(request, 'login/login.html')
 
 def logoutUser(request):
     logout(request)
@@ -38,9 +38,9 @@ def signupUser(request):
                 user.save()
                 return redirect('/login/')
             except Exception as e:
-                return render(request, 'signup.html', {'status_code': 409})
+                return render(request, 'login/signup.html', {'status_code': 409})
         else:
-            return render(request, 'signup.html', {'status_code': 401})
+            return render(request, 'login/signup.html', {'status_code': 401})
             
-    return render(request, 'signup.html')
+    return render(request, 'login/signup.html')
     

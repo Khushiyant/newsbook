@@ -7,9 +7,9 @@ import json
 
 class scrap:
     def __init__(self, apikey):
-        api = NewsDataApiClient(apikey=apikey)
-        response = api.news_api(q = "trending" , country = "in", language="en")
-        # response = json.load(open("newsscrap/test.json"))
+        # api = NewsDataApiClient(apikey=apikey)
+        # response = api.news_api(q = "trending" , country = "in", language="en")
+        response = json.load(open("newsscrap/test.json"))
         self.data = response['results'] if response['status'] == 'success' else None
 
     def get_data(self):
