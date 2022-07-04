@@ -1,3 +1,4 @@
+import email
 from django.db import models
 
 # Create your models here.
@@ -10,3 +11,10 @@ class Contact(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name}_{self.number}"
+
+class Newsletter(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+
+    def __str__(self) -> str:
+        return f"{self.name}"
