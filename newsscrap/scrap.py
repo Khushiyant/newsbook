@@ -1,6 +1,11 @@
-from urllib import response
-from newsdataapi import NewsDataApiClient
 import json
+from urllib import response
+
+from newsdataapi import NewsDataApiClient
+
+from .summarizer import summarize
+import yaml
+
 # API key authorization, Initialize the client with your API key
 # You can pass empty or with request parameters {ex. (country = "us")}
 
@@ -20,7 +25,7 @@ class scrap:
         for dt in self.data:
             try:
                 context['post_data'].append((dt['keywords'][0] if dt['keywords'] is not None else "Top", dt['pubDate'] if dt['pubDate'] is not None else "None", dt['title']
-                                            if dt['title'] is not None else "None", dt['description'] if dt['description'] is not None else "None", dt['image_url'] if dt['image_url'] is not None else "None", dt['link'] if dt['link'] is not None else "None"))
+                                            if dt['title'] is not None else "None", dt['description'] if dt['description'] is not None else summarize.summary(dt['content']).getsummary(), dt['image_url'] if dt['image_url'] is not None else "None", dt['link'] if dt['link'] is not None else "None"))
             except Exception as e:
                 print(e)
         return context
@@ -35,4 +40,4 @@ class scrap:
 
 
 if __name__ == "__main__":
-    scrap("pub_86308d85a19dd4b6ec10c5f34bcdd4fa9704").get_data()
+    scrap(yaml.full_load("/tmp/config.yaml")['newsdata']['api_key']).get_data()
