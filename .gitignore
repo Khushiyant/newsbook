@@ -1,5 +1,8 @@
 tmp
-newsscrap/test.json
+*.json
 venv
-.gitignore
 sentencepiece
+.env
+.DS_Store
+*.pyc
+.gitignore
