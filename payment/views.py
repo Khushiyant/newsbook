@@ -7,7 +7,7 @@ def pricing(request):
         'plan_status_pro': 'Buy Now',
         'plan_status_enterprise': 'Buy Now',
     }
-    return render(request, 'pricing.html',context)
+    return render(request, 'landing/pricing.html',context)
 
 def checkout(request):
     pass

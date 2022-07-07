@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'loginSystem.apps.LoginsystemConfig',
     'landing.apps.LandingConfig',
     'payment.apps.PaymentConfig',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
