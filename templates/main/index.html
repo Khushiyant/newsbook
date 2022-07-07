@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% block 'title' %}Home{% endblock 'title' %} {% block
-'body' %}
+{% extends 'base.html' %} {% block 'title' %}Home{% endblock 'title' %} 
+{% block 'body' %}
 <style>
   /* stylelint-disable selector-list-comma-newline-after */
 
@@ -233,15 +233,16 @@
     <div class="col-md-8">
       <h3 class="pb-4 mb-4 fst-italic border-bottom">Education Corner</h3>
 
-      {% for blog_title, blog_author, blog_content in blogs %}
+      {% for edit_title, edit_author, edit_content in editorials %}
 
       <article class="blog-post">
-        <h2 class="blog-post-title mb-1">{{blog_title}}</h2>
+        <h2 class="blog-post-title mb-1">{{edit_title}}</h2>
+        <h4>{{edit_author}}</h4>
         <p class="blog-post-meta">
-          {% now "jS F Y" %} by <a href="#">{{blog_author}}</a>
+          {% now "jS F Y" %} 
         </p>
 
-        <p>{{blog_content}}</p>
+        <p>{{edit_content}}</p>
       </article>
 	  
       {% endfor %}

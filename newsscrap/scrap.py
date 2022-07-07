@@ -3,8 +3,7 @@ import requests
 import bs4
 from newsdataapi import NewsDataApiClient
 
-from summarizer import summarize
-import yaml
+from newsscrap.summarizer import summarize
 import os
 
 # API key authorization, Initialize the client with your API key

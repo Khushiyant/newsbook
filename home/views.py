@@ -1,4 +1,4 @@
-from os import stat
+import os
 from django.shortcuts import redirect, render
 from datetime import datetime
 from home.models import Contact
@@ -30,8 +30,10 @@ def index(request):
     #     'post_date': datetime.now().strftime("%d %b %Y")
 
     # }
-    context = scrap("pub_86308d85a19dd4b6ec10c5f34bcdd4fa9704").get_data_newsdataapi()
-    return render(request, 'main/index.html', context)
+    scrapobj = scrap("pub_86308d85a19dd4b6ec10c5f34bcdd4fa9704")
+    newsdata = scrapobj.get_data_newsdataapi()
+    hindueditorials = scrapobj.get_hindu_editorials()
+    return render(request, 'main/index.html', {**newsdata, **hindueditorials})
 
 
 def profile(request):
