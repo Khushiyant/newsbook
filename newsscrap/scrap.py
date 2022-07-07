@@ -17,7 +17,7 @@ class scrap:
         response = json.load(open("newsscrap/test.json"))
         self.data = response['results'] if response['status'] == 'success' else None
 
-    def get_data(self):
+    def get_data_newsdataapi(self):
         # return self.data
         context = {
             'post_data': []
@@ -30,6 +30,9 @@ class scrap:
                 print(e)
         return context
 
+    def get_hindu_editorials(self):
+        pass
+    
     @staticmethod
     def get_name():
         return "scrap v0.1.0"

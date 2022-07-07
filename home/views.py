@@ -30,7 +30,7 @@ def index(request):
     #     'post_date': datetime.now().strftime("%d %b %Y")
 
     # }
-    context = scrap("pub_86308d85a19dd4b6ec10c5f34bcdd4fa9704").get_data()
+    context = scrap("pub_86308d85a19dd4b6ec10c5f34bcdd4fa9704").get_data_newsdataapi()
     return render(request, 'main/index.html', context)
 
 

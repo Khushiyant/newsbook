@@ -1,3 +1,5 @@
-newsbook-env
 tmp
 newsscrap/test.json
+venv
+.gitignore
+sentencepiece
