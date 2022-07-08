@@ -3,22 +3,30 @@ import requests
 import bs4
 from newsdataapi import NewsDataApiClient
 
-from newsscrap.summarizer import summarize
+from summarizer import summarize
 import os
 
 # API key authorization, Initialize the client with your API key
 # You can pass empty or with request parameters {ex. (country = "us")}
 
+
 class scrap:
-    def __init__(self, apikey:str):
+    @staticmethod
+    def get_name():
+        return "scrap v0.2.0"
+
+    @staticmethod
+    def get_description():
+        return "Scrapes the current news according to geoip2 location and hindu editorials"
+
+    def __init__(self, apikey: str):
+
         # api = NewsDataApiClient(apikey=apikey)
         # response = api.news_api(q = "trending" , country = "in", language="en")
         response = json.load(open("newsscrap/test.json"))
         self.data = response['results'] if response['status'] == 'success' else None
 
         # Hindu Editorial Data
-        r = requests.get("https://www.thehindu.com/opinion/editorial/")
-        self.soup = bs4.BeautifulSoup(r.text, "html.parser")
 
     def get_data_newsdataapi(self) -> dict:
         # return self.data
@@ -34,6 +42,9 @@ class scrap:
         return context
 
     def get_hindu_editorials(self) -> dict:
+
+        r = requests.get("https://www.thehindu.com/opinion/editorial/")
+        self.soup = bs4.BeautifulSoup(r.text, "html.parser")
         links = []
         context = {
             'editorials': []
@@ -45,22 +56,28 @@ class scrap:
         for link in links:
             r = requests.get(link)
             soup = bs4.BeautifulSoup(r.text, "html.parser")
-            article = soup.find("div", {"class":"article"})
+            article = soup.find("div", {"class": "article"})
 
             title = article.find("h1").text
-            desc =  article.find("h2").text
-            content = article.find("div", id=lambda x: x and x.startswith('content-body-')).text
-            context['editorials'].append((title, desc ,content))
+            desc = article.find("h2").text
+            content = article.find(
+                "div", id=lambda x: x and x.startswith('content-body-')).text
+            context['editorials'].append((title, desc, content))
         return context
 
-    @staticmethod
-    def get_name():
-        return "scrap v0.2.0"
+    def get_upcoming_exams(self):
+        context = {}
+        r = requests.get(
+            "https://www.embibe.com/exams/upcoming-government-exams/")
+        soup = bs4.BeautifulSoup(r.text, "html.parser")
 
-    @staticmethod
-    def get_description():
-        return "Scrapes the current news according to geoip2 location and hindu editorials"
+        data = []
+        table = soup.find("table")
+        for tr in table.find_all("tr"):
+            data.append(tr)
+        context['exams'] = data
+        return context
 
 
 if __name__ == "__main__":
-    print(scrap(os.getenv("API_KEY")).get_hindu_editorials())
+    print(scrap(os.getenv("API_KEY")).get_upcoming_exams())

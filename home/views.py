@@ -33,6 +33,8 @@ def index(request):
     scrapobj = scrap("pub_86308d85a19dd4b6ec10c5f34bcdd4fa9704")
     newsdata = scrapobj.get_data_newsdataapi()
     hindueditorials = scrapobj.get_hindu_editorials()
+    # exams = scrapobj.get_upcoming_exams()
+    
     return render(request, 'main/index.html', {**newsdata, **hindueditorials})
 
 
