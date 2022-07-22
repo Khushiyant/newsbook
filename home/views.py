@@ -1,3 +1,4 @@
+from multiprocessing import context
 import os
 from django.shortcuts import redirect, render
 from datetime import datetime
@@ -33,9 +34,14 @@ def index(request):
     scrapobj = scrap("pub_86308d85a19dd4b6ec10c5f34bcdd4fa9704")
     newsdata = scrapobj.get_data_newsdataapi()
     hindueditorials = scrapobj.get_hindu_editorials()
-    # exams = scrapobj.get_upcoming_exams()
-    
-    return render(request, 'main/index.html', {**newsdata, **hindueditorials})
+    exams = scrapobj.get_upcoming_exams()
+
+    # print(newsdata)
+    # print(hindueditorials)
+    # print(exams)
+
+    context = {**newsdata, **hindueditorials, **exams}
+    return render(request, 'main/index.html', context)
 
 
 def profile(request):

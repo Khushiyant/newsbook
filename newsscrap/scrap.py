@@ -31,11 +31,11 @@ class scrap:
     def get_data_newsdataapi(self) -> dict:
         # return self.data
         context = {
-            'post_data': []
+            "post_data": [],
         }
         for dt in self.data:
             try:
-                context['post_data'].append((dt['keywords'][0] if dt['keywords'] is not None else "Top", dt['pubDate'] if dt['pubDate'] is not None else "None", dt['title']
+                context["post_data"].append((dt['keywords'][0] if dt['keywords'] is not None else "Top", dt['pubDate'] if dt['pubDate'] is not None else "None", dt['title']
                                             if dt['title'] is not None else "None", dt['description'] if dt['description'] is not None else summarize.summary(dt['content']).getsummary(), dt['image_url'] if dt['image_url'] is not None else "None", dt['link'] if dt['link'] is not None else "None"))
             except Exception as e:
                 print(e)
@@ -47,7 +47,7 @@ class scrap:
         self.soup = bs4.BeautifulSoup(r.text, "html.parser")
         links = []
         context = {
-            'editorials': []
+            "editorials": [],
         }
 
         for div in self.soup.find_all("div", {"class": "ES2-100x4-text1 hover-icon"}):
@@ -62,7 +62,7 @@ class scrap:
             desc = article.find("h2").text
             content = article.find(
                 "div", id=lambda x: x and x.startswith('content-body-')).text
-            context['editorials'].append((title, desc, content))
+            context["editorials"].append((title, desc, content))
         return context
 
     def get_upcoming_exams(self):
@@ -75,7 +75,7 @@ class scrap:
         table = soup.find("table")
         for tr in table.find_all("tr"):
             data.append(tr)
-        context['exams'] = data
+        context["exams"] = [table.find("tbody")]
         return context
 
 
