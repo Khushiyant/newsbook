@@ -139,14 +139,14 @@
 <div class="container">
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-      <a class="p-2 link-secondary" href="#">World</a>
-      <a class="p-2 link-secondary" href="#">India</a>
-      <a class="p-2 link-secondary" href="#">Trending</a>
-      <a class="p-2 link-secondary" href="#">Technology</a>
-      <a class="p-2 link-secondary" href="#">Opinion</a>
-      <a class="p-2 link-secondary" href="#">Business</a>
-      <a class="p-2 link-secondary" href="#">Politics</a>
-      <a class="p-2 link-secondary" href="#">Science</a>
+      <a class="p-2 link-secondary" href="world">World</a>
+      <a class="p-2 link-secondary" href="india">India</a>
+      <a class="p-2 link-secondary" href="trending">Trending</a>
+      <a class="p-2 link-secondary" href="technology">Technology</a>
+      <a class="p-2 link-secondary" href="opinion">Opinion</a>
+      <a class="p-2 link-secondary" href="business">Business</a>
+      <a class="p-2 link-secondary" href="politics">Politics</a>
+      <a class="p-2 link-secondary" href="science">Science</a>
     </nav>
   </div>
 </div>
@@ -250,10 +250,10 @@
       
       {% endfor %}
 
-      <h4 class="pb-4 mb-4 fst-italic ">List of Upcoming Government Exams</h4>
+      {% comment %} <h4 class="pb-4 mb-4 fst-italic ">List of Upcoming Government Exams</h4>
        <table class="table table-hover">
                 {{exams | safe}}
-        </table> 
+        </table>  {% endcomment %}
 
 
       <nav class="blog-pagination" aria-label="Pagination">
@@ -273,9 +273,7 @@
         <div class="p-4 mb-3 bg-light rounded">
           <h4 class="fst-italic">About</h4>
           <p class="mb-0">
-            Customize this section to tell your visitors a little bit about your
-            publication, writers, content, or something else entirely. Totally
-            up to you.
+            Newsbook is a initiative to provide on the go news, along with one-stop articles and more.
           </p>
         </div>
 
