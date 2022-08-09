@@ -19,17 +19,14 @@ class scrap:
     def get_description():
         return "Scrapes the current news according to geoip2 location and hindu editorials"
 
-    def __init__(self, apikey: str):
+    def __init__(self, apikey: str, topic):
 
         # api = NewsDataApiClient(apikey=apikey)
-        # response = api.news_api(q = "trending" , country = "in", language="en")
+        # response = api.news_api(q = topic, country = "in", language="en")
         response = json.load(open("newsscrap/test.json"))
         self.data = response['results'] if response['status'] == 'success' else None
 
-        # Hindu Editorial Data
-
     def get_data_newsdataapi(self) -> dict:
-        # return self.data
         context = {
             "post_data": [],
         }

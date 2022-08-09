@@ -8,39 +8,16 @@ import yaml
 
 # Create your views here.
 
-
-def index(request):
+def index(request, topic="trending"):
     if request.user.is_anonymous:
         return redirect('/login')
 
-    # api_key = yaml.full_load('config.yaml')['newsdata']['api_key']
-    # context = scrap('pub_86308d85a19dd4b6ec10c5f34bcdd4fa9704').get_data()
-    # context = {
-    #     'status': True,
-    #     'feature_title': "Title of a longer featured blog post",
-    #     'feature_img': 'https://64.media.tumblr.com/fa5e27c33743758eb802dc79c799a041/1c21a381185e7c09-f9/s1280x1920/7b114d3320760bebea6af5c49068734242fe261a.jpg',
-    #     'feature_link': "#",
-    #     'feature_desc': "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.",
-
-    #     'post_data': [('World', 'Title1', 'This is a wider card with supporting text below as a natural lead-in to additional content.', '#'),
-    #                   ('India', 'Title2', 'This is a wider card with supporting text below as a natural lead-in to additional content.', '#'),
-    #                   ('Science', 'Title3', 'This is a wider card with supporting text below as a natural lead-in to additional content.', '#'),
-    #                   ('Development', 'Title4',
-    #                    'This is a wider card with supporting text below as a natural lead-in to additional content.', '#'),
-    #                   ('Education', 'Title5', 'This is a wider card with supporting text below as a natural lead-in to additional content.', '#')],
-    #     'post_date': datetime.now().strftime("%d %b %Y")
-
-    # }
-    scrapobj = scrap("pub_86308d85a19dd4b6ec10c5f34bcdd4fa9704")
+    scrapobj = scrap("pub_86308d85a19dd4b6ec10c5f34bcdd4fa9704", topic)
     newsdata = scrapobj.get_data_newsdataapi()
     hindueditorials = scrapobj.get_hindu_editorials()
-    exams = scrapobj.get_upcoming_exams()
+    # exams = scrapobj.get_upcoming_exams()
 
-    # print(newsdata)
-    # print(hindueditorials)
-    # print(exams)
-
-    context = {**newsdata, **hindueditorials, **exams}
+    context = {**newsdata, **hindueditorials}
     return render(request, 'main/index.html', context)
 
 
