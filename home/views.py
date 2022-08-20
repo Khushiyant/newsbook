@@ -59,4 +59,4 @@ def services(request):
 
 def error_404_view(request, exception):
    
-    return render(request, '404.html')
+    return render(request, 'error/404.html')
